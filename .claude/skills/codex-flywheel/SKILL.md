@@ -32,7 +32,7 @@ OR=$(gh repo view --json nameWithOwner -q .nameWithOwner)
 /usr/bin/python3 - <<'PY' > /tmp/fw-findings.json
 import re, json
 t = open('/tmp/fw-bodies.txt').read()
-m = re.findall(r'<!-- flywheel-findings\n(.*?)\n-->', t, re.S)
+m = re.findall(r'<!--\s*flywheel-findings\r?\n(.*?)\r?\n-->', t, re.S)
 print(m[-1] if m else '{"findings":[]}')
 PY
 ```
@@ -81,7 +81,7 @@ git switch -c "flywheel/harness-update-$(date +%Y%m%d)" 2>/dev/null || git switc
 ### 7. ledger append (finding마다 1줄)
 ```bash
 # 인자 순서: PR FID FP CLASS SEV DECISION ARTIFACT REC STATUS  (모두 실제 값으로)
-/usr/bin/python3 - "$PR" FID FP CLASS SEV DECISION ARTIFACT REC STATUS <<'PY' >> .claude/flywheel/ledger.jsonl
+/usr/bin/python3 - "$PR" "FID" "FP" "CLASS" "SEV" "DECISION" "ARTIFACT" "REC" "STATUS" <<'PY' >> .claude/flywheel/ledger.jsonl
 import json, sys
 pr,fid,fp,cls,sev,dec,art,rec,st = sys.argv[1:10]
 print(json.dumps({"cycle":"PR"+pr,"pr":pr,"finding_id":fid,"fingerprint":fp,

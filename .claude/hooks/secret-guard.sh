@@ -38,7 +38,7 @@ srole = re.compile(r'service[_-]?role', re.I)
 cred = re.compile(r'''(password|passwd|secret|api[_-]?key|access[_-]?token|token|credential)\s*[:=]\s*['"][^'"]{4,}['"]''', re.I)
 high, med = [], []
 for i, l in enumerate(lines, 1):
-    if jwt.search(l) or (srole.search(l) and re.search(r'''['"][^'"]{8,}['"]''', l)):
+    if jwt.search(l) or (srole.search(l) and any(len(s) >= 40 for s in re.findall(r'''['"]([^'"]+)['"]''', l))):
         high.append((i, l.strip()[:120]))
     elif cred.search(l) and not ph.search(l):
         med.append((i, l.strip()[:120]))

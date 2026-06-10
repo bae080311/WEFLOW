@@ -27,7 +27,7 @@ Codex 요약 코멘트의 구조화 블록이 있으면 그대로 신뢰:
 /usr/bin/python3 - <<'PY' > /tmp/rv-codex.json
 import re,json
 t=open('/tmp/rv-reviews.json').read()+open('/tmp/rv-issue.json').read()
-m=re.findall(r'<!-- flywheel-findings\n(.*?)\n-->', t, re.S)
+m=re.findall(r'<!--\s*flywheel-findings\r?\n(.*?)\r?\n-->', t, re.S)
 print(m[-1] if m else '{"findings":[]}')
 PY
 ```

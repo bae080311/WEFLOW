@@ -38,6 +38,9 @@ try:
     src = open(f, encoding='utf-8').read()
 except Exception:
     sys.exit(0)
+# 주석(/* */, //) 제거 후 검사 — 주석 처리된 import나 문자열 리터럴 오탐 방지(차단 가드이므로 중요)
+src = re.sub(r'/\*.*?\*/', '', src, flags=re.DOTALL)
+src = re.sub(r'//.*', '', src)
 # `from '@/<layer>'`, `import '@/<layer>'`, `import('@/<layer>')`
 specs = re.findall(r'''(?:from|import)\s*\(?\s*['"]@/([^/'"]+)''', src)
 viol = sorted({l for l in specs if l in rank and rank[l] > rank[cur]})
