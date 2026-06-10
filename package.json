@@ -14,7 +14,17 @@
     "test:coverage": "vitest run --coverage",
     "test:e2e": "playwright test",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,css}": [
+      "prettier --write"
+    ]
   },
   "dependencies": {
     "@tanstack/react-query": "^5.101.0",
@@ -39,7 +49,9 @@
     "eslint": "^9.18.0",
     "eslint-config-next": "16.2.6",
     "eslint-config-prettier": "^10.0.0",
+    "husky": "^9.1.7",
     "jsdom": "^26.0.0",
+    "lint-staged": "^15.5.0",
     "prettier": "^3.4.0",
     "tailwindcss": "^4.0.0",
     "typescript": "^5.7.0",
