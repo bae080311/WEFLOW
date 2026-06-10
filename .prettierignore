@@ -1,0 +1,17 @@
+node_modules
+.next
+out
+build
+coverage
+playwright-report
+test-results
+*.tsbuildinfo
+public
+src/shared/fonts
+
+# 하네스 / 문서 / 자동생성 — Prettier 비대상
+.claude
+.github
+*.md
+tsconfig.json
+package-lock.json
