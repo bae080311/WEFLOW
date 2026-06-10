@@ -1,0 +1,31 @@
+{
+  "comment_marker": "[codex]",
+  "model_reasoning_effort": "high",
+  "diff_char_cap": 120000,
+  "edit_budget_per_run": 10,
+  "harness_branch_prefix": "flywheel/harness-update-",
+  "recurrence": {
+    "advisory_hook_at": 3,
+    "blocking_hook_at": 5
+  },
+  "edit_targets_allow": [
+    ".claude/rules/",
+    ".claude/agents/",
+    ".claude/skills/",
+    ".claude/hooks/",
+    ".claude/settings.json",
+    "CLAUDE.md"
+  ],
+  "edit_targets_protect": [
+    ".claude/flywheel/",
+    "scripts/codex-flywheel.sh"
+  ],
+  "human_gated_actions": [
+    "blocking-hook",
+    "settings.json-wiring",
+    "agent-edit",
+    "skill-edit",
+    "contradiction",
+    "size-cap-breach"
+  ]
+}

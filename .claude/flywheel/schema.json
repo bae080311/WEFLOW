@@ -1,0 +1,50 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["findings"],
+  "properties": {
+    "findings": {
+      "type": "array",
+      "description": "All review findings against the WEFLOW harness rules. Empty array if the diff is clean.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["severity", "class", "path", "line", "title", "body", "systemic", "harness_hint"],
+        "properties": {
+          "severity": {
+            "type": "string",
+            "enum": ["high", "medium", "low"]
+          },
+          "class": {
+            "type": "string",
+            "description": "Stable kebab-case slug for the issue category, reused across PRs so recurrence can be counted. Examples: fsd-import, hardcoded-color, hardcoded-secret, dead-link, missing-test, low-coverage, dup-component, weak-responsive, missing-focus-state, cta-misroute, content-not-extracted, next16-misuse."
+          },
+          "path": {
+            "type": ["string", "null"],
+            "description": "Repo-relative file path the finding refers to, or null if not file-specific."
+          },
+          "line": {
+            "type": ["integer", "null"],
+            "description": "Line number on the RIGHT side of the diff, or null if not applicable."
+          },
+          "title": {
+            "type": "string",
+            "description": "One-line summary of the issue."
+          },
+          "body": {
+            "type": "string",
+            "description": "Actionable detail: what is wrong and how to fix it."
+          },
+          "systemic": {
+            "type": "boolean",
+            "description": "true if this is a class of issue the harness should prevent (rule/checklist/hook); false if it is a one-off code bug with no general lesson."
+          },
+          "harness_hint": {
+            "type": ["string", "null"],
+            "description": "Which .claude rule SHOULD have caught this (e.g. coding-rules.md#10 FSD, design-system.md color tokens), or the literal 'harness-gap' if no rule covers it yet, or null."
+          }
+        }
+      }
+    }
+  }
+}
