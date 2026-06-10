@@ -1,0 +1,5 @@
+# Hook test fixtures live here.
+# When the flywheel promotes a finding class to an executable hook, it writes
+# <hook-name>/good.<ext> (must pass: exit 0, silent) and <hook-name>/bad.<ext>
+# (must trigger: advisory JSON on stdout, or exit 2 for a blocking hook) here,
+# and runs them as a gate before wiring the hook into settings.json.
