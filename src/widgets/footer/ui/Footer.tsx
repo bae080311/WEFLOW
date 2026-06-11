@@ -58,14 +58,24 @@ export function Footer() {
           ))}
         </div>
 
-        <div className="flex flex-col gap-1 border-t border-border pt-8 text-caption text-text-muted">
-          <p>
-            대표 {COMPANY.ceo} · 사업자등록번호 {COMPANY.businessNumber}
-          </p>
-          <p>
-            이메일 {COMPANY.email} · 운영시간 {COMPANY.hours}
-          </p>
-        </div>
+        <dl className="flex flex-col gap-1 border-t border-border pt-8 text-caption text-text-muted">
+          <div className="flex gap-1">
+            <dt>대표 :</dt>
+            <dd>{COMPANY.ceo}</dd>
+          </div>
+          <div className="flex gap-1">
+            <dt>사업자등록번호 :</dt>
+            <dd>{COMPANY.businessNumber}</dd>
+          </div>
+          <div className="flex gap-1">
+            <dt>이메일 :</dt>
+            <dd>{COMPANY.email}</dd>
+          </div>
+          <div className="flex gap-1">
+            <dt>운영시간 :</dt>
+            <dd>{COMPANY.hours}</dd>
+          </div>
+        </dl>
 
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div className="flex flex-wrap gap-4">

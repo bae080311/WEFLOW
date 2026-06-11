@@ -12,6 +12,14 @@ describe("Footer", () => {
     expect(screen.getByText(/© 2026 WEFLOW/)).toBeInTheDocument();
   });
 
+  it("회사 정보를 라벨과 값으로 한 줄씩 표시한다", () => {
+    render(<Footer />);
+    expect(screen.getByText("대표 :")).toBeInTheDocument();
+    expect(screen.getByText("사업자등록번호 :")).toBeInTheDocument();
+    expect(screen.getByText("이메일 :")).toBeInTheDocument();
+    expect(screen.getByText("운영시간 :")).toBeInTheDocument();
+  });
+
   it("개인정보처리방침/이용약관을 실제 라우트로 연결한다", () => {
     render(<Footer />);
     expect(screen.getByRole("link", { name: "개인정보처리방침" })).toHaveAttribute(
