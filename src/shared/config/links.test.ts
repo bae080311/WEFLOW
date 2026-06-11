@@ -1,16 +1,16 @@
 import { describe, it, expect } from "vitest";
-import { externalLinks, externalLinkAttrs } from "./links";
+import { EXTERNAL_LINKS, EXTERNAL_LINK_ATTRS } from "./links";
 
-describe("externalLinks", () => {
+describe("EXTERNAL_LINKS", () => {
   it("requirements §7 정확값과 일치한다", () => {
-    expect(externalLinks.tel).toBe("tel:01029717280");
-    expect(externalLinks.kakao).toBe("http://pf.kakao.com/_xntCbX");
-    expect(externalLinks.blog).toBe("https://m.blog.naver.com/weflowlab");
-    expect(externalLinks.instagram).toBe("https://www.instagram.com/weflowlab.kr");
-    expect(externalLinks.facebook).toBe("https://www.facebook.com/profile.php?id=61590187124682");
+    expect(EXTERNAL_LINKS.tel).toBe("tel:01029717280");
+    expect(EXTERNAL_LINKS.kakao).toBe("http://pf.kakao.com/_xntCbX");
+    expect(EXTERNAL_LINKS.blog).toBe("https://m.blog.naver.com/weflowlab");
+    expect(EXTERNAL_LINKS.instagram).toBe("https://www.instagram.com/weflowlab.kr");
+    expect(EXTERNAL_LINKS.facebook).toBe("https://www.facebook.com/profile.php?id=61590187124682");
   });
 
   it("안전한 외부 앵커 속성을 노출한다", () => {
-    expect(externalLinkAttrs).toEqual({ target: "_blank", rel: "noopener noreferrer" });
+    expect(EXTERNAL_LINK_ATTRS).toEqual({ target: "_blank", rel: "noopener noreferrer" });
   });
 });

@@ -1,9 +1,9 @@
 import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { CaseCard } from "./CaseCard";
-import { cases } from "../model";
+import { CASES } from "../model";
 
-const sample = cases[0]; // pt-shop
+const sample = CASES[0]; // pt-shop
 
 describe("CaseCard", () => {
   it("업종명과 이미지를 렌더한다", () => {

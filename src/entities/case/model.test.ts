@@ -1,21 +1,21 @@
 import { readdirSync } from "node:fs";
 import { join } from "node:path";
 import { describe, it, expect } from "vitest";
-import { cases, getCaseBySlug } from "./model";
+import { CASES, getCaseBySlug } from "./model";
 
-describe("cases", () => {
+describe("CASES", () => {
   it("requirements §6 의 28개 업종을 담는다", () => {
-    expect(cases).toHaveLength(28);
+    expect(CASES).toHaveLength(28);
   });
 
   it("slug 가 모두 고유하고 URL-safe 다", () => {
-    const slugs = cases.map((c) => c.slug);
+    const slugs = CASES.map((c) => c.slug);
     expect(new Set(slugs).size).toBe(28);
     slugs.forEach((slug) => expect(slug).toMatch(/^[a-z0-9-]+$/));
   });
 
   it("이미지 경로가 /cases_*.jpg 형식이다", () => {
-    cases.forEach((c) => {
+    CASES.forEach((c) => {
       expect(c.image).toMatch(/^\/cases_.+\.jpg$/);
     });
   });
@@ -24,7 +24,7 @@ describe("cases", () => {
     const files = new Set(
       readdirSync(join(process.cwd(), "public")).map((f) => f.normalize("NFC")),
     );
-    cases.forEach((c) => {
+    CASES.forEach((c) => {
       const filename = c.image.replace(/^\//, "").normalize("NFC");
       expect(files.has(filename)).toBe(true);
     });
