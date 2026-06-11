@@ -5,7 +5,7 @@ export type Case = {
   summary: string;
 };
 
-const rawCases: { slug: string; industry: string; file: string }[] = [
+const RAW: { slug: string; industry: string; file: string }[] = [
   { slug: "pt-shop", industry: "PT샵", file: "PT샵" },
   { slug: "pilates", industry: "필라테스", file: "필라테스" },
   { slug: "gym", industry: "헬스장", file: "헬스장" },
@@ -36,7 +36,7 @@ const rawCases: { slug: string; industry: string; file: string }[] = [
   { slug: "cleaning", industry: "청소업체", file: "청소업체" },
 ];
 
-export const cases: Case[] = rawCases.map(({ slug, industry, file }) => ({
+export const CASES: Case[] = RAW.map(({ slug, industry, file }) => ({
   slug,
   industry,
   image: `/cases_${file}.jpg`,
@@ -44,5 +44,5 @@ export const cases: Case[] = rawCases.map(({ slug, industry, file }) => ({
 }));
 
 export function getCaseBySlug(slug: string): Case | undefined {
-  return cases.find((c) => c.slug === slug);
+  return CASES.find((c) => c.slug === slug);
 }

@@ -7,7 +7,7 @@ export type Review = {
   quote: string;
 };
 
-export const reviews: Review[] = [
+export const REVIEWS: Review[] = [
   {
     id: "review-pt",
     author: "김도윤 대표",

@@ -15,7 +15,7 @@ export type PricingPlan = {
   crown: boolean;
 };
 
-export const pricingPlans: PricingPlan[] = [
+export const PRICING_PLANS: PricingPlan[] = [
   {
     id: "start",
     group: "제작",
