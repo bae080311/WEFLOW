@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import { X } from "lucide-react";
 import { Button } from "@/shared/ui";
@@ -30,7 +31,7 @@ export function MobileDrawer({ open, onClose, pathname }: MobileDrawerProps) {
 
   if (!open) return null;
 
-  return (
+  return createPortal(
     <div className="fixed inset-0 z-50 md:hidden">
       <div
         data-testid="drawer-backdrop"
@@ -44,7 +45,7 @@ export function MobileDrawer({ open, onClose, pathname }: MobileDrawerProps) {
         aria-modal="true"
         aria-label="모바일 메뉴"
         tabIndex={-1}
-        className="absolute right-0 top-0 flex h-full w-72 max-w-[80%] flex-col gap-2 border-l border-border bg-surface p-5 focus:outline-none"
+        className="absolute right-0 top-0 flex h-full w-72 max-w-[80%] flex-col gap-2 border-l border-border bg-surface p-5 shadow-2xl focus:outline-none"
       >
         <button
           type="button"
@@ -74,6 +75,7 @@ export function MobileDrawer({ open, onClose, pathname }: MobileDrawerProps) {
           무료진단 신청
         </Button>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }

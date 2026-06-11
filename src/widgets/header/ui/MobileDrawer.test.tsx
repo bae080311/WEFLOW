@@ -20,10 +20,19 @@ describe("MobileDrawer", () => {
     expect(nav).toBeInTheDocument();
   });
 
+  it("사이드 패널은 body 포털의 불투명 배경으로 표시한다", () => {
+    render(<MobileDrawer open onClose={() => {}} pathname="/" />);
+    const dialog = screen.getByRole("dialog", { name: "모바일 메뉴" });
+    expect(dialog).toHaveClass("bg-surface");
+    expect(dialog.parentElement?.parentElement).toBe(document.body);
+  });
+
   it("backdrop 클릭으로 닫는다", async () => {
     const onClose = vi.fn();
     render(<MobileDrawer open onClose={onClose} pathname="/" />);
-    await userEvent.click(screen.getByTestId("drawer-backdrop"));
+    const backdrop = screen.getByTestId("drawer-backdrop");
+    expect(backdrop).toHaveClass("bg-bg-deep/80");
+    await userEvent.click(backdrop);
     expect(onClose).toHaveBeenCalled();
   });
 
