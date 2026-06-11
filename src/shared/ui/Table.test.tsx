@@ -19,7 +19,7 @@ describe("Table", () => {
       </Table>,
     );
     const table = screen.getByRole("table");
-    expect(table).toHaveClass("min-w-[640px]");
+    expect(table).toHaveClass("min-w-160");
     expect(table.parentElement).toHaveClass("overflow-x-auto");
   });
 
