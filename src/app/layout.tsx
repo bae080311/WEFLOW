@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import { ModalProvider } from "@/shared/lib";
+import { FormModal } from "@/widgets/formModal";
 import { pretendard } from "./fonts";
 import { Providers } from "./providers";
 import "./globals.css";
@@ -11,12 +13,16 @@ export const metadata: Metadata = {
   icons: { icon: "/favicon.ico" },
 };
 
-// 공통 셸(Header/Footer/BottomBar/FormModal)은 P3에서 추가. P1 layout 은 폰트 + Providers 만.
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ko" className={pretendard.variable}>
       <body>
-        <Providers>{children}</Providers>
+        <Providers>
+          <ModalProvider>
+            {children}
+            <FormModal />
+          </ModalProvider>
+        </Providers>
       </body>
     </html>
   );

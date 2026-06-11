@@ -23,7 +23,35 @@
   --color-warning: #ff8b1a;
   --color-danger: #fb2c36;
 
+  /* radius (design-system §4): 카드 16, 버튼/컨트롤 12, 입력 10, pill 은 rounded-full */
   --radius-card: 16px;
+  --radius-control: 12px;
+  --radius-input: 10px;
+
+  /* typography (design-system §3): size + 페어링 line-height/weight (Tailwind v4 형제 키) */
+  --text-hero: clamp(28px, 6vw, 56px);
+  --text-hero--line-height: 1.1;
+  --text-hero--font-weight: 700;
+  --text-h1: 28px;
+  --text-h1--line-height: 1.25;
+  --text-h1--font-weight: 700;
+  --text-h2: 22px;
+  --text-h2--line-height: 1.25;
+  --text-h2--font-weight: 700;
+  --text-h3: 18px;
+  --text-h3--line-height: 1.25;
+  --text-h3--font-weight: 700;
+  --text-body: 16px;
+  --text-body--line-height: 1.6;
+  --text-caption: 13px;
+  --text-caption--line-height: 1.5;
+
+  /* 컨텐츠 컨테이너 최대 폭 (design-system §8: 1200px) → max-w-content */
+  --container-content: 75rem;
+
+  /* 브랜드 글로우를 shadow 유틸로 노출 → shadow-glow / hover:shadow-glow (hex 없이 사용) */
+  --shadow-glow: 0 0 24px rgba(34, 211, 238, 0.35);
+
   --font-sans: var(--font-pretendard), "Apple SD Gothic Neo", system-ui, sans-serif;
 }
 
@@ -44,6 +72,76 @@
   background-size: 24px 24px;
 }
 
+/* ── 브랜드 비주얼 헬퍼 (hex 없이 컴포넌트에서 사용) ── */
+
+/* 시그니처 그라디언트 텍스트 (히어로 키워드 강조) */
+.text-gradient-brand {
+  background: linear-gradient(135deg, #22d3ee 0%, #54a2ff 45%, #2563eb 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* 히어로 오로라 배경 — 브랜드 시안/블루 글로우 블롭 */
+.aurora-hero {
+  position: absolute;
+  inset: -20% -10% auto -10%;
+  height: 130%;
+  pointer-events: none;
+  background:
+    radial-gradient(40% 50% at 18% 22%, rgba(34, 211, 238, 0.22) 0%, transparent 70%),
+    radial-gradient(45% 55% at 82% 18%, rgba(37, 99, 235, 0.26) 0%, transparent 72%),
+    radial-gradient(50% 45% at 50% 96%, rgba(84, 162, 255, 0.14) 0%, transparent 75%);
+  filter: blur(8px);
+  animation: aurora-drift 18s ease-in-out infinite alternate;
+}
+
+/* 떠다니는 글로우 오브 */
+.glow-orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(64px);
+  opacity: 0.5;
+  pointer-events: none;
+  animation: float-slow 12s ease-in-out infinite alternate;
+}
+
+/* 진입 애니메이션 */
+.animate-fade-up {
+  opacity: 0;
+  animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes float-slow {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(0, -24px, 0) scale(1.06);
+  }
+}
+
+@keyframes aurora-drift {
+  from {
+    transform: translate3d(-3%, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(3%, 2%, 0) scale(1.08);
+  }
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -53,4 +151,16 @@ body {
   color: var(--color-text);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+}
+
+/* design-system §9: prefers-reduced-motion 존중 — 전역으로 애니메이션/트랜지션 억제(P4+ 마퀴·fadeInUp 포함) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
