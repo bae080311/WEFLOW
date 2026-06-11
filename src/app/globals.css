@@ -72,6 +72,76 @@
   background-size: 24px 24px;
 }
 
+/* ── 브랜드 비주얼 헬퍼 (hex 없이 컴포넌트에서 사용) ── */
+
+/* 시그니처 그라디언트 텍스트 (히어로 키워드 강조) */
+.text-gradient-brand {
+  background: linear-gradient(135deg, #22d3ee 0%, #54a2ff 45%, #2563eb 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* 히어로 오로라 배경 — 브랜드 시안/블루 글로우 블롭 */
+.aurora-hero {
+  position: absolute;
+  inset: -20% -10% auto -10%;
+  height: 130%;
+  pointer-events: none;
+  background:
+    radial-gradient(40% 50% at 18% 22%, rgba(34, 211, 238, 0.22) 0%, transparent 70%),
+    radial-gradient(45% 55% at 82% 18%, rgba(37, 99, 235, 0.26) 0%, transparent 72%),
+    radial-gradient(50% 45% at 50% 96%, rgba(84, 162, 255, 0.14) 0%, transparent 75%);
+  filter: blur(8px);
+  animation: aurora-drift 18s ease-in-out infinite alternate;
+}
+
+/* 떠다니는 글로우 오브 */
+.glow-orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(64px);
+  opacity: 0.5;
+  pointer-events: none;
+  animation: float-slow 12s ease-in-out infinite alternate;
+}
+
+/* 진입 애니메이션 */
+.animate-fade-up {
+  opacity: 0;
+  animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes float-slow {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(0, -24px, 0) scale(1.06);
+  }
+}
+
+@keyframes aurora-drift {
+  from {
+    transform: translate3d(-3%, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(3%, 2%, 0) scale(1.08);
+  }
+}
+
 html {
   scroll-behavior: smooth;
 }
