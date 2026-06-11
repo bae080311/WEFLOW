@@ -1,7 +1,7 @@
 import { describe, it, expect, afterEach } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { ModalProvider, useInquiryModal } from "@/shared/lib/modal-context";
+import { ModalProvider, useInquiryModal } from "@/shared/lib/modalContext";
 import { FormModal } from "./FormModal";
 
 function Opener() {

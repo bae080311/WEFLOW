@@ -1,11 +1,11 @@
 import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { PriceCard } from "./PriceCard";
-import { PRICING_PLANS } from "../model";
+import { pricingPlans } from "../model";
 
-const master = PRICING_PLANS.find((p) => p.id === "master")!;
-const start = PRICING_PLANS.find((p) => p.id === "start")!;
-const weCare = PRICING_PLANS.find((p) => p.id === "we-care")!;
+const master = pricingPlans.find((p) => p.id === "master")!;
+const start = pricingPlans.find((p) => p.id === "start")!;
+const weCare = pricingPlans.find((p) => p.id === "we-care")!;
 
 describe("PriceCard", () => {
   it("플랜명·구성·할인가·정가(취소선)를 렌더한다", () => {

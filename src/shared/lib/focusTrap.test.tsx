@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, afterEach } from "vitest";
 import { useRef } from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import { useFocusTrap } from "./focus-trap";
+import { useFocusTrap } from "./focusTrap";
 
 function Trap({ active, onClose }: { active: boolean; onClose: () => void }) {
   const ref = useRef<HTMLDivElement>(null);

@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { ModalProvider, useInquiryModal } from "./modal-context";
+import { ModalProvider, useInquiryModal } from "./modalContext";
 
 function Probe() {
   const { isOpen, source, openInquiryModal, closeInquiryModal } = useInquiryModal();
@@ -14,7 +14,7 @@ function Probe() {
   );
 }
 
-describe("modal-context", () => {
+describe("modalContext", () => {
   it("기본은 닫힘 상태다", () => {
     render(
       <ModalProvider>
