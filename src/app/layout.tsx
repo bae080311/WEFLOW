@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import { ModalProvider } from "@/shared/lib";
+import { FormModal } from "@/widgets/form-modal";
 import { pretendard } from "./fonts";
 import { Providers } from "./providers";
 import "./globals.css";
@@ -11,12 +13,18 @@ export const metadata: Metadata = {
   icons: { icon: "/favicon.ico" },
 };
 
-// 공통 셸(Header/Footer/BottomBar/FormModal)은 P3에서 추가. P1 layout 은 폰트 + Providers 만.
+// 루트 레이아웃은 최소 유지: 폰트 + Providers + 전역 ModalProvider/FormModal 마운트만.
+// 마케팅 크롬(Header/Footer/BottomBar)은 app/(site)/layout.tsx 에 있고, /admin 은 그룹 밖이라 독립 셸이다.
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ko" className={pretendard.variable}>
       <body>
-        <Providers>{children}</Providers>
+        <Providers>
+          <ModalProvider>
+            {children}
+            <FormModal />
+          </ModalProvider>
+        </Providers>
       </body>
     </html>
   );
