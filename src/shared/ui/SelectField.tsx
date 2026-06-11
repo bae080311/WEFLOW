@@ -44,7 +44,7 @@ export function SelectField({
         required={required}
         aria-invalid={error ? true : undefined}
         aria-describedby={error ? errorId : undefined}
-        className={cn(FIELD_CONTROL, "h-11 appearance-none", error && "border-danger", className)}
+        className={cn(FIELD_CONTROL, "h-11", error && "border-danger", className)}
         defaultValue={placeholderDefault}
         {...rest}
       >

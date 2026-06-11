@@ -18,12 +18,17 @@ export type MobileDrawerProps = {
 export function MobileDrawer({ open, onClose, pathname }: MobileDrawerProps) {
   const panelRef = useRef<HTMLDivElement>(null);
   const onCloseRef = useRef(onClose);
+  const isFirstRender = useRef(true);
 
   useEffect(() => {
     onCloseRef.current = onClose;
   });
 
   useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
     onCloseRef.current();
   }, [pathname]);
 

@@ -15,10 +15,7 @@ export function CheckboxField({ label, error, id, className, ...rest }: Checkbox
 
   return (
     <div className="flex flex-col gap-1">
-      <label
-        htmlFor={fieldId}
-        className="flex cursor-pointer items-start gap-2 text-caption text-text-muted"
-      >
+      <div className="flex items-start gap-2">
         <input
           id={fieldId}
           type="checkbox"
@@ -27,8 +24,10 @@ export function CheckboxField({ label, error, id, className, ...rest }: Checkbox
           className={cn("mt-1 size-4 accent-primary", className)}
           {...rest}
         />
-        <span>{label}</span>
-      </label>
+        <label htmlFor={fieldId} className="cursor-pointer text-caption text-text-muted">
+          {label}
+        </label>
+      </div>
       {error ? (
         <p id={errorId} className="text-caption text-danger">
           {error}

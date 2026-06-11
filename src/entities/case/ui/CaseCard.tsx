@@ -12,7 +12,7 @@ export type CaseCardProps = {
 
 export function CaseCard({ caseItem, className }: CaseCardProps) {
   return (
-    <Card interactive className={cn("flex flex-col gap-0 overflow-hidden p-0", className)}>
+    <Card interactive className={cn("relative flex flex-col gap-0 overflow-hidden p-0", className)}>
       <div className="relative aspect-4/3 w-full overflow-hidden">
         <Image
           src={caseItem.image}
@@ -27,7 +27,7 @@ export function CaseCard({ caseItem, className }: CaseCardProps) {
         <p className="text-caption text-text-muted">{caseItem.summary}</p>
         <Link
           href={ROUTES.caseDetail(caseItem.slug)}
-          className="mt-1 inline-flex w-fit items-center text-caption font-medium text-brand-cyan hover:underline focus-visible:underline focus-visible:outline-none"
+          className="mt-1 inline-flex w-fit items-center text-caption font-medium text-brand-cyan after:absolute after:inset-0 after:content-[''] hover:underline focus-visible:underline focus-visible:outline-none"
         >
           자세히 보기 →
         </Link>
