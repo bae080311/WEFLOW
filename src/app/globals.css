@@ -23,7 +23,35 @@
   --color-warning: #ff8b1a;
   --color-danger: #fb2c36;
 
+  /* radius (design-system §4): 카드 16, 버튼/컨트롤 12, 입력 10, pill 은 rounded-full */
   --radius-card: 16px;
+  --radius-control: 12px;
+  --radius-input: 10px;
+
+  /* typography (design-system §3): size + 페어링 line-height/weight (Tailwind v4 형제 키) */
+  --text-hero: clamp(28px, 6vw, 56px);
+  --text-hero--line-height: 1.1;
+  --text-hero--font-weight: 700;
+  --text-h1: 28px;
+  --text-h1--line-height: 1.25;
+  --text-h1--font-weight: 700;
+  --text-h2: 22px;
+  --text-h2--line-height: 1.25;
+  --text-h2--font-weight: 700;
+  --text-h3: 18px;
+  --text-h3--line-height: 1.25;
+  --text-h3--font-weight: 700;
+  --text-body: 16px;
+  --text-body--line-height: 1.6;
+  --text-caption: 13px;
+  --text-caption--line-height: 1.5;
+
+  /* 컨텐츠 컨테이너 최대 폭 (design-system §8: 1200px) → max-w-content */
+  --container-content: 75rem;
+
+  /* 브랜드 글로우를 shadow 유틸로 노출 → shadow-glow / hover:shadow-glow (hex 없이 사용) */
+  --shadow-glow: 0 0 24px rgba(34, 211, 238, 0.35);
+
   --font-sans: var(--font-pretendard), "Apple SD Gothic Neo", system-ui, sans-serif;
 }
 
@@ -53,4 +81,16 @@ body {
   color: var(--color-text);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+}
+
+/* design-system §9: prefers-reduced-motion 존중 — 전역으로 애니메이션/트랜지션 억제(P4+ 마퀴·fadeInUp 포함) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
