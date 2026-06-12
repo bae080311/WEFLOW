@@ -47,6 +47,7 @@ export function ClosingCta({
     if (!el) return;
 
     let raf = 0;
+    let initialRaf = 0;
     const update = () => {
       raf = 0;
       const rect = el.getBoundingClientRect();
@@ -57,13 +58,14 @@ export function ClosingCta({
       if (!raf) raf = window.requestAnimationFrame(update);
     };
     update();
-    window.requestAnimationFrame(update);
+    initialRaf = window.requestAnimationFrame(update);
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll, { passive: true });
     return () => {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
       if (raf) window.cancelAnimationFrame(raf);
+      if (initialRaf) window.cancelAnimationFrame(initialRaf);
     };
   }, [enabled]);
 

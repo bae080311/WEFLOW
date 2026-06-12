@@ -33,6 +33,7 @@ export function Hero() {
     setEnabled(true);
 
     let raf = 0;
+    let initialRaf = 0;
     const update = () => {
       raf = 0;
       const rect = el.getBoundingClientRect();
@@ -45,13 +46,14 @@ export function Hero() {
     };
     update();
     // 첫 페인트 후 다시 측정(min-height 적용 전 오측정 보정).
-    window.requestAnimationFrame(update);
+    initialRaf = window.requestAnimationFrame(update);
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll, { passive: true });
     return () => {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
       if (raf) window.cancelAnimationFrame(raf);
+      if (initialRaf) window.cancelAnimationFrame(initialRaf);
     };
   }, []);
 

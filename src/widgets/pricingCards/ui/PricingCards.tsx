@@ -30,7 +30,9 @@ export function PricingCards({ groups = DEFAULT_GROUPS, className }: PricingCard
   // 활성 탭 위치를 측정해 인디케이터를 이동(탭 변경·리사이즈 시).
   useEffect(() => {
     const measure = () => {
-      const el = tabRefs.current[groups.indexOf(active)];
+      const idx = groups.indexOf(active);
+      if (idx === -1) return;
+      const el = tabRefs.current[idx];
       if (el) setIndicator({ left: el.offsetLeft, width: el.offsetWidth });
     };
     measure();

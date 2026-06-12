@@ -11,10 +11,10 @@ export function ProcessOverview() {
         <div className="lg:sticky lg:top-28 lg:self-start">
           <Reveal className="flex flex-col gap-6">
             <SectionHeader as="h2" size="lg" eyebrow="HOW IT WORKS" title="제작 진행 과정" />
-            <ol className="relative flex flex-col gap-4 pl-12">
+            <div role="list" className="relative flex flex-col gap-4 pl-12">
               <div className="spine-brand absolute bottom-3 left-5 top-3 w-px" aria-hidden />
               {PRODUCTION_STEPS_4.map((s) => (
-                <li key={s.step} className="relative flex items-center">
+                <div key={s.step} role="listitem" className="relative flex items-center">
                   <span className="absolute -left-12 grid size-10 place-items-center rounded-full bg-surface gradient-ring">
                     <span className="text-gradient-brand text-caption font-bold leading-none">
                       {String(s.step).padStart(2, "0")}
@@ -23,9 +23,9 @@ export function ProcessOverview() {
                   <div className="flex-1 rounded-card border border-border bg-surface/60 px-5 py-4 backdrop-blur-sm transition-colors duration-200 hover:border-brand-cyan/40">
                     <span className="text-body font-medium text-text">{s.title}</span>
                   </div>
-                </li>
+                </div>
               ))}
-            </ol>
+            </div>
           </Reveal>
         </div>
         <div className="flex flex-col gap-6">
