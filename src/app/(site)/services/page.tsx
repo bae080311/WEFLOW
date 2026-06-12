@@ -1,9 +1,11 @@
-import { Container } from "@/shared/ui";
+import { ServicesProcess, ServicesAdOps } from "@/views/services";
 
+// 서비스 (§3-2) — 제작 진행 과정 6단계 + 광고 운영·사후관리 시스템.
 export default function ServicesPage() {
   return (
-    <Container as="section" className="py-20">
-      <h1 className="text-h1 font-bold text-text">서비스</h1>
-    </Container>
+    <>
+      <ServicesProcess />
+      <ServicesAdOps />
+    </>
   );
 }

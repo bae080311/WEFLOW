@@ -1,6 +1,28 @@
-import { Hero } from "@/views/home";
+import { DiagnosisChecklist } from "@/widgets/diagnosisChecklist";
+import { StatsBand } from "@/widgets/statsBand";
+import { ClosingCta } from "@/widgets/closingCta";
+import {
+  Hero,
+  ValueCards,
+  CarePlanSection,
+  CaseSummary,
+  ProcessOverview,
+  ReviewSection,
+} from "@/views/home";
 
-// 홈 — P4에서 후속 섹션 추가 예정. 현재 히어로(§3-1) 적용.
+// 홈 (§3-1) — 히어로 + 신뢰지표 + 핵심가치 + 케어플랜 혜택 + 성공사례 + 제작과정 + 무료진단 + 후기 + 마감 CTA.
 export default function HomePage() {
-  return <Hero />;
+  return (
+    <>
+      <Hero />
+      <StatsBand />
+      <ValueCards />
+      <CarePlanSection />
+      <CaseSummary />
+      <ProcessOverview />
+      <DiagnosisChecklist />
+      <ReviewSection />
+      <ClosingCta />
+    </>
+  );
 }
