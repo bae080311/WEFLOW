@@ -11,7 +11,7 @@ test("홈 히어로가 렌더되고 핵심 CTA가 연결된다", async ({ page }
   // 헤더 로고 (전역 셸)
   await expect(page.getByRole("link", { name: "WEFLOW 홈" })).toBeVisible();
 
-  // 히어로 CTA → 무료진단
-  await page.getByRole("link", { name: "무료 진단 신청" }).click();
+  // 히어로 CTA → 무료진단 (페이지 하단 ClosingCta 밴드에도 동명 링크가 있어 히어로 것으로 한정)
+  await page.getByRole("link", { name: "무료 진단 신청" }).first().click();
   await expect(page).toHaveURL(/\/diagnosis$/);
 });

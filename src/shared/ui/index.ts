@@ -3,6 +3,8 @@ export * from "./Container";
 export * from "./Section";
 export * from "./SectionHeader";
 export * from "./Card";
+export * from "./Reveal";
+export * from "./CountUp";
 export * from "./Badge";
 export * from "./StatusBadge";
 export * from "./Chip";

@@ -1,5 +1,4 @@
 import { cn } from "@/shared/lib/cn";
-import { Card } from "./Card";
 
 export type ProcessStepCardProps = {
   step: number;
@@ -11,12 +10,18 @@ export type ProcessStepCardProps = {
 export function ProcessStepCard({ step, title, description, className }: ProcessStepCardProps) {
   const label = String(step).padStart(2, "0");
   return (
-    <Card variant="gradient" className={cn("flex flex-col gap-3", className)}>
-      <span className="bg-gradient-brand bg-clip-text text-h1 font-bold leading-none text-transparent">
-        {label}
-      </span>
-      <h3 className="text-h3 text-text">{title}</h3>
-      {description ? <p className="text-body text-text-muted">{description}</p> : null}
-    </Card>
+    <div
+      className={cn(
+        "accent-top group relative h-full overflow-hidden rounded-card border border-border bg-gradient-card p-6",
+        "transition-[transform,border-color,box-shadow] duration-300 ease-out",
+        "hover:-translate-y-1 hover:border-brand-cyan/40 hover:shadow-glow",
+        "motion-reduce:transition-none motion-reduce:hover:translate-y-0",
+        className,
+      )}
+    >
+      <span className="text-gradient-brand text-h1 font-bold leading-none">{label}</span>
+      <h3 className="mt-4 text-h3 text-text">{title}</h3>
+      {description ? <p className="mt-2 text-body text-text-muted">{description}</p> : null}
+    </div>
   );
 }

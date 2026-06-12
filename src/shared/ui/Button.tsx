@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import { cn } from "@/shared/lib/cn";
 
-export type ButtonVariant = "gradient" | "solid" | "outlined" | "ghost";
+export type ButtonVariant = "gradient" | "solid" | "outlined" | "ghost" | "inverse";
 export type ButtonSize = "sm" | "md" | "lg";
 
 const base =
@@ -16,6 +16,8 @@ const variants: Record<ButtonVariant, string> = {
   solid: "bg-primary text-white hover:bg-primary-soft",
   outlined: "border border-border-strong bg-transparent text-text hover:bg-surface-2",
   ghost: "bg-transparent text-text-muted hover:bg-surface hover:text-text",
+  // 컬러 배경(브랜드 그라디언트 밴드) 위에서 사용하는 화이트 버튼
+  inverse: "bg-white text-primary hover:bg-white/90",
 };
 
 const sizes: Record<ButtonSize, string> = {

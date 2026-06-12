@@ -27,16 +27,58 @@ export const DIAGNOSIS_CHECKLIST: string[] = [
   "문의 개선 제안",
 ];
 
-export const AD_OPS_SYSTEM: string[] = [
-  "블로그 업로드",
-  "인스타 업로드",
-  "스레드 업로드",
-  "네이버 키워드 업로드",
-  "당근플레이스 키워드 업로드",
-  "네이버 서치어드바이저 상단등록",
-  "구글 콘솔 상단등록",
-  "사이트맵 등록",
+// WEFLOW 케어플랜 혜택 6칸 (홈·랜딩 재사용) — 제목 + 보조 설명
+export type CareBenefit = { title: string; description: string };
+
+export const CARE_BENEFIT_ITEMS: CareBenefit[] = [
+  { title: "WEFLOW 케어플랜", description: "제작·운영·광고·관리 올인원 케어" },
+  { title: "제작 + 운영 + 광고 + 관리 원터치", description: "한 팀이 처음부터 끝까지 책임집니다" },
+  { title: "빠른 제작 3~7일", description: "로켓배송처럼 빠르게 오픈합니다" },
+  { title: "합리적 가성비", description: "거품 없는 합리적 비용으로 시작" },
+  { title: "24시간 상담대기", description: "언제든 빠른 상담과 피드백" },
+  { title: "운영·광고 사후관리", description: "오픈 후 성과까지 지속 관리" },
 ];
+
+// 기존 소비처/테스트 호환용 제목 목록(파생)
+export const CARE_BENEFITS: string[] = CARE_BENEFIT_ITEMS.map((b) => b.title);
+
+// 광고 운영·사후관리 시스템 — 두 그룹(채널 업로드 / 검색 상단 노출) + 플랫폼 아이콘 키
+export type AdOpsIconKey =
+  | "blog"
+  | "instagram"
+  | "threads"
+  | "naver-keyword"
+  | "danggn"
+  | "naver-seo"
+  | "google"
+  | "sitemap";
+
+export type AdOpsItem = { label: string; icon: AdOpsIconKey };
+export type AdOpsGroup = { title: string; items: AdOpsItem[] };
+
+export const AD_OPS_GROUPS: AdOpsGroup[] = [
+  {
+    title: "채널 업로드",
+    items: [
+      { label: "블로그 업로드", icon: "blog" },
+      { label: "인스타 업로드", icon: "instagram" },
+      { label: "스레드 업로드", icon: "threads" },
+      { label: "네이버 키워드 업로드", icon: "naver-keyword" },
+      { label: "당근플레이스 키워드 업로드", icon: "danggn" },
+    ],
+  },
+  {
+    title: "검색 상단 노출",
+    items: [
+      { label: "네이버 서치어드바이저 상단등록", icon: "naver-seo" },
+      { label: "구글 콘솔 상단등록", icon: "google" },
+      { label: "사이트맵 등록", icon: "sitemap" },
+    ],
+  },
+];
+
+// 기존 소비처/테스트 호환용 평탄 목록(파생)
+export const AD_OPS_SYSTEM: string[] = AD_OPS_GROUPS.flatMap((g) => g.items.map((i) => i.label));
 
 export const PROJECT_TYPE_OPTIONS: readonly ProjectType[] = [
   "랜딩페이지 제작",

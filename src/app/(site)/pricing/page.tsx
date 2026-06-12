@@ -1,9 +1,6 @@
-import { Container } from "@/shared/ui";
+import { PricingView } from "@/views/pricing";
 
+// 제작플랜 & 가격안내 (§3-3) — 8개 카드 3그룹 + VAT/안내 + 진단 CTA.
 export default function PricingPage() {
-  return (
-    <Container as="section" className="py-20">
-      <h1 className="text-h1 font-bold text-text">제작플랜 &amp; 가격안내</h1>
-    </Container>
-  );
+  return <PricingView />;
 }

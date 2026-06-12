@@ -67,9 +67,123 @@
 .glow-brand {
   box-shadow: 0 0 24px rgba(34, 211, 238, 0.35);
 }
+/* 히어로 리빌 — 로고 구멍 뒤로 비치는 중앙 브랜드 글로우 */
+.hero-reveal-glow {
+  background:
+    radial-gradient(38% 42% at 50% 50%, rgba(34, 211, 238, 0.5) 0%, transparent 70%),
+    radial-gradient(60% 64% at 50% 56%, rgba(37, 99, 235, 0.34) 0%, transparent 76%);
+}
+/* 어두운 오버레이에 WEFLOW 로고(W) 모양으로 구멍을 뚫는 마스크.
+   레이어1=로고(알파=W), 레이어2=전체 불투명 → exclude(XOR) = W 영역만 투명(구멍).
+   구멍 크기 --hole 은 스크롤 진행도에 따라 인라인으로 커진다. */
+.logo-knockout {
+  -webkit-mask:
+    url("/logo_icon.png") center / var(--hole, 22vmin) no-repeat,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    url("/logo_icon.png") center / var(--hole, 22vmin) no-repeat,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+}
 .dot-grid {
   background-image: radial-gradient(rgba(148, 163, 184, 0.07) 1px, transparent 1px);
   background-size: 24px 24px;
+}
+
+/* 섹션 앰비언트 — 가장자리에 은은한 브랜드 글로우(절제). 풀블리드 배경 위 오버레이 */
+.section-aura {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(38% 60% at 8% 0%, rgba(34, 211, 238, 0.1) 0%, transparent 70%),
+    radial-gradient(42% 60% at 100% 30%, rgba(37, 99, 235, 0.12) 0%, transparent 72%);
+}
+
+/* 그라디언트 하어라인 보더 — featured 카드/강조 요소 (마스크 합성으로 1px 테두리만 그라디언트) */
+.gradient-ring {
+  position: relative;
+}
+.gradient-ring::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(34, 211, 238, 0.65) 0%, rgba(37, 99, 235, 0.65) 100%);
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* 카드 상단 그라디언트 스트립(2px) — 프로세스/featured 카드 강조 */
+.accent-top::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, #22d3ee 0%, #2563eb 100%);
+}
+
+/* 브랜드 그라디언트 헤어라인(섹션 구분/타임라인 spine) */
+.divider-brand {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(34, 211, 238, 0.5) 25%,
+    rgba(37, 99, 235, 0.5) 75%,
+    transparent 100%
+  );
+}
+.spine-brand {
+  background: linear-gradient(
+    180deg,
+    rgba(34, 211, 238, 0.6) 0%,
+    rgba(37, 99, 235, 0.45) 60%,
+    transparent 100%
+  );
+}
+
+/* 이미지 하단 가독성 스크림(모노크롬 다크→투명, 3종 그라디언트 규칙과 무관) */
+.scrim-dark {
+  background: linear-gradient(to top, rgba(8, 13, 26, 0.72) 0%, transparent 55%);
+}
+/* 전체 높이 강한 스크림(대형 풀블리드 비주얼 위 텍스트 가독성) */
+.scrim-dark-strong {
+  background: linear-gradient(
+    to top,
+    rgba(8, 13, 26, 0.95) 0%,
+    rgba(8, 13, 26, 0.45) 45%,
+    transparent 100%
+  );
+}
+
+/* 마퀴 양끝 페이드(콘텐츠가 가장자리에서 자연스럽게 사라짐) */
+.marquee-mask {
+  -webkit-mask: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+  mask: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+}
+
+/* 스크롤 진입 리빌 — Reveal 컴포넌트가 .is-visible 을 붙이면 나타난다 */
+.reveal {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
 }
 
 /* ── 브랜드 비주얼 헬퍼 (hex 없이 컴포넌트에서 사용) ── */
@@ -113,6 +227,29 @@
   animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
+/* 히어로 인트로 — 헤드라인이 좌우에서 들어오고 말풍선이 팝인 (reduced-motion 시 즉시 최종상태) */
+.animate-slide-in-left {
+  opacity: 0;
+  animation: slide-in-left 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.animate-slide-in-right {
+  opacity: 0;
+  animation: slide-in-right 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.animate-bubble-pop {
+  opacity: 0;
+  animation: bubble-pop 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* 후기 마퀴 — 트랙(리뷰 2벌)을 -50% 이동해 무한 루프. 전역 reduced-motion 블록이 정지시킴 */
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+/* 반대 방향(둘째 줄용). 클래스명은 Tailwind animate-* 네임스페이스 충돌을 피해 비-animate 로 둔다 */
+.marquee-reverse {
+  animation: marquee 40s linear infinite reverse;
+}
+
 @keyframes fade-up {
   from {
     opacity: 0;
@@ -121,6 +258,43 @@
   to {
     opacity: 1;
     transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translate3d(-60px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translate3d(60px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes bubble-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(1.04);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 
@@ -139,6 +313,15 @@
   }
   to {
     transform: translate3d(3%, 2%, 0) scale(1.08);
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
@@ -162,5 +345,10 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+  /* 진입 애니메이션 비활성 시에도 콘텐츠는 즉시 보이게 한다 */
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
