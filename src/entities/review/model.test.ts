@@ -2,8 +2,17 @@ import { describe, it, expect } from "vitest";
 import { REVIEWS } from "./model";
 
 describe("REVIEWS", () => {
-  it("후기 마퀴용으로 5개 이상 제공한다", () => {
-    expect(REVIEWS.length).toBeGreaterThanOrEqual(5);
+  it("후기 마퀴용으로 8개를 제공한다", () => {
+    expect(REVIEWS).toHaveLength(8);
+  });
+
+  it("모든 후기는 필수 필드(작성자·상호·업종·문구)를 갖는다", () => {
+    REVIEWS.forEach((r) => {
+      expect(r.author.length).toBeGreaterThan(0);
+      expect(r.business.length).toBeGreaterThan(0);
+      expect(r.industry.length).toBeGreaterThan(0);
+      expect(r.quote.length).toBeGreaterThan(0);
+    });
   });
 
   it("모든 후기는 5점이다", () => {

@@ -12,15 +12,19 @@ export type CaseCardProps = {
 
 export function CaseCard({ caseItem, className }: CaseCardProps) {
   return (
-    <Card interactive className={cn("relative flex flex-col gap-0 overflow-hidden p-0", className)}>
+    <Card
+      interactive
+      className={cn("group relative flex flex-col gap-0 overflow-hidden p-0", className)}
+    >
       <div className="relative aspect-4/3 w-full overflow-hidden">
         <Image
           src={caseItem.image}
           alt={`${caseItem.industry} 제작 사례`}
           fill
           sizes="(max-width: 768px) 100vw, 400px"
-          className="object-cover"
+          className="object-cover transition-transform duration-500 ease-out group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
         />
+        <div className="scrim-dark pointer-events-none absolute inset-0" aria-hidden />
       </div>
       <div className="flex flex-col gap-2 p-5">
         <h3 className="text-h3 text-text">{caseItem.industry}</h3>
