@@ -24,16 +24,14 @@ test("무료진단 페이지가 진단 체크리스트와 단계형 문의 폼�
   await expect(page.getByRole("button", { name: "문의 보내기" })).toBeVisible();
 });
 
-test("예약 페이지가 달력과 오전/오후 시간 선택을 노출한다", async ({ page }) => {
+test("예약 페이지가 달력과 20슬롯 시간 그리드를 노출한다", async ({ page }) => {
   await page.goto("/reservation");
   await expect(page.getByRole("group", { name: "희망 날짜 선택" })).toBeVisible();
   await expect(page.getByRole("button", { name: "다음 달" })).toBeVisible();
-  // 오전/오후 세그먼트로 슬롯 묶음 표시
-  await expect(page.getByRole("button", { name: "오전", exact: true })).toBeVisible();
-  await page.getByRole("button", { name: "오후", exact: true }).click();
-  await expect(page.getByRole("button", { name: "18:30" })).toBeVisible();
-  await page.getByRole("button", { name: "오전", exact: true }).click();
+  // 20슬롯(09:00~18:30)을 5×4 그리드로 한 번에 표시(오전/오후 분리 없음)
+  await expect(page.getByRole("group", { name: "희망 시간 선택" })).toBeVisible();
   await expect(page.getByRole("button", { name: "09:00" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "18:30" })).toBeVisible();
   await expect(page.getByLabel(/원하시는 시간대/)).toBeVisible();
   // 1단계 → "다음"으로 진행하는 스텝 위저드
   await expect(page.getByText("일정 선택")).toBeVisible();
@@ -44,7 +42,6 @@ test("예약 스텝 위저드: 일정 → 정보 → 확인 진행", async ({ pa
   await page.goto("/reservation");
   await page.getByRole("button", { name: "다음 달" }).click();
   await page.getByRole("button", { name: "15", exact: true }).click();
-  await page.getByRole("button", { name: "오후", exact: true }).click();
   await page.getByRole("button", { name: "14:00" }).click();
   await page.getByRole("button", { name: "다음", exact: true }).click();
 
