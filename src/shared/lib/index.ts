@@ -1,4 +1,5 @@
 export * from "./cn";
+export * from "./image";
 export * from "./modalContext";
 export * from "./focusTrap";
 export * from "./datetime";

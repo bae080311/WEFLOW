@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Card } from "@/shared/ui";
 import { ROUTES } from "@/shared/config";
-import { cn } from "@/shared/lib";
+import { BLUR_DATA_URL, cn } from "@/shared/lib";
 import type { Case } from "../model";
 
 export type CaseCardProps = {
@@ -36,6 +36,8 @@ export function CaseCard({ caseItem, index, reverse, className }: CaseCardProps)
           alt={`${caseItem.industry} 제작 사례`}
           fill
           sizes="(max-width: 768px) 100vw, 600px"
+          placeholder="blur"
+          blurDataURL={BLUR_DATA_URL}
           className="object-cover transition-transform duration-500 ease-out group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
         />
         <div className="scrim-dark pointer-events-none absolute inset-0" aria-hidden />
