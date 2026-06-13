@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowLeft, Check } from "lucide-react";
 import { Button, Container, Reveal, Section, SectionHeader } from "@/shared/ui";
 import { ROUTES } from "@/shared/config";
+import { BLUR_DATA_URL } from "@/shared/lib";
 import type { CaseDetail } from "@/entities/case";
 
 export type CaseDetailViewProps = {
@@ -34,7 +35,16 @@ export function CaseDetailView({ detail }: CaseDetailViewProps) {
       {/* 이미지 히어로 */}
       <section className="relative isolate overflow-hidden bg-bg-deep">
         <div className="absolute inset-0" aria-hidden>
-          <Image src={detail.image} alt="" fill priority sizes="100vw" className="object-cover" />
+          <Image
+            src={detail.image}
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            placeholder="blur"
+            blurDataURL={BLUR_DATA_URL}
+            className="object-cover"
+          />
           <div className="scrim-dark-strong absolute inset-0" />
           <div className="absolute inset-0 dot-grid opacity-30" />
         </div>

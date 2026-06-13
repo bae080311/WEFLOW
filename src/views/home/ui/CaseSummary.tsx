@@ -7,7 +7,7 @@ import { ArrowRight } from "lucide-react";
 import { Button, Container, Reveal, Section, SectionHeader } from "@/shared/ui";
 import { getCaseBySlug, type Case } from "@/entities/case";
 import { ROUTES } from "@/shared/config";
-import { cn } from "@/shared/lib";
+import { BLUR_DATA_URL, cn } from "@/shared/lib";
 import { CASE_SUMMARY_SLUGS } from "../config/homeContent";
 
 const SUMMARY_CASES: Case[] = CASE_SUMMARY_SLUGS.map((slug) => getCaseBySlug(slug)).filter(
@@ -55,6 +55,8 @@ export function CaseSummary() {
                   sizes={
                     isActive ? "(max-width: 768px) 100vw, 60vw" : "(max-width: 768px) 100vw, 15vw"
                   }
+                  placeholder="blur"
+                  blurDataURL={BLUR_DATA_URL}
                   className={cn(
                     "object-cover transition-transform duration-700 ease-out motion-reduce:transition-none",
                     isActive ? "scale-105" : "scale-100",
