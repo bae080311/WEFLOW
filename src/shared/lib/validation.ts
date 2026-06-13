@@ -1,4 +1,4 @@
-import { isPastDate } from "./datetime";
+import { isPastDate, isSlotDisabled } from "./datetime";
 
 export type FieldErrors = Record<string, string>;
 
@@ -67,6 +67,12 @@ export function validateReservation(values: ReservationFormValues, now: Date): F
   }
   if (!values.desiredTime.trim()) {
     errors.desiredTime = "희망 시간을 선택하거나 직접 입력해 주세요.";
+  } else if (
+    !values.isManualTime &&
+    values.desiredDate.trim() &&
+    isSlotDisabled(values.desiredTime, values.desiredDate, now)
+  ) {
+    errors.desiredTime = "지난 시간은 선택할 수 없습니다.";
   }
   return errors;
 }

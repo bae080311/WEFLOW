@@ -6,6 +6,7 @@ export function Table({ className, ...rest }: ComponentPropsWithoutRef<"table">)
   return (
     <div className="w-full md:overflow-x-auto">
       <table
+        role="table"
         className={cn(
           "block w-full border-collapse text-left text-body md:table md:min-w-160",
           className,

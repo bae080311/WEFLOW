@@ -13,6 +13,7 @@ export type AdminCellProps = ComponentPropsWithoutRef<"td"> & {
 export function AdminCell({ label, stack, className, children, ...rest }: AdminCellProps) {
   return (
     <td
+      role="cell"
       className={cn(
         "gap-3 py-1.5 first:pt-0 last:pb-0 md:table-cell md:border-b md:border-border md:px-4 md:py-3 md:first:pt-3 md:last:pb-3",
         stack ? "flex flex-col items-start" : "flex items-center justify-between",

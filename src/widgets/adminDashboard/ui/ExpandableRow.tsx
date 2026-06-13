@@ -18,9 +18,15 @@ export function ExpandableRow({ cells, details, colSpan }: ExpandableRowProps) {
   const [open, setOpen] = useState(false);
   return (
     <>
-      <tr className="block rounded-card border border-border bg-surface p-4 align-middle md:table-row md:rounded-none md:border-0 md:bg-transparent md:p-0">
+      <tr
+        role="row"
+        className="block rounded-card border border-border bg-surface p-4 align-middle md:table-row md:rounded-none md:border-0 md:bg-transparent md:p-0"
+      >
         {cells}
-        <td className="flex justify-end pt-2 md:table-cell md:border-b md:border-border md:px-4 md:py-3 md:text-right">
+        <td
+          role="cell"
+          className="flex justify-end pt-2 md:table-cell md:border-b md:border-border md:px-4 md:py-3 md:text-right"
+        >
           <button
             type="button"
             aria-expanded={open}
@@ -35,12 +41,14 @@ export function ExpandableRow({ cells, details, colSpan }: ExpandableRowProps) {
       </tr>
       {open ? (
         <tr
+          role="row"
           className={cn(
             "block rounded-card border border-border bg-surface-2/40 p-4",
             "md:table-row md:rounded-none md:border-0 md:bg-transparent md:p-0",
           )}
         >
           <td
+            role="cell"
             colSpan={colSpan}
             className="block md:table-cell md:border-b md:border-border md:bg-surface-2/40 md:px-4 md:py-3"
           >

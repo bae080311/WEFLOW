@@ -107,4 +107,20 @@ describe("validation — validateReservation", () => {
     );
     expect(isValid(errors)).toBe(true);
   });
+
+  it("오늘 날짜의 지난 시간 슬롯은 에러(now=13:00, 12:00 선택)", () => {
+    const errors = validateReservation(
+      { ...base, desiredDate: "2026-06-13", desiredTime: "12:00", isManualTime: false },
+      now,
+    );
+    expect(errors.desiredTime).toContain("지난 시간");
+  });
+
+  it("오늘 날짜라도 직접 입력은 지난 시간 검증을 적용하지 않음", () => {
+    const errors = validateReservation(
+      { ...base, desiredDate: "2026-06-13", desiredTime: "오전이요", isManualTime: true },
+      now,
+    );
+    expect(isValid(errors)).toBe(true);
+  });
 });
