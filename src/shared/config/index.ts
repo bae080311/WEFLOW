@@ -4,3 +4,4 @@ export * from "./company";
 export * from "./footer";
 export * from "./bottomCta";
 export * from "./weflowContent";
+export * from "./legal";

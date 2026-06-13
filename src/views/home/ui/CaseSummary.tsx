@@ -28,7 +28,7 @@ export function CaseSummary() {
             size="lg"
             eyebrow="SUCCESS CASES"
             title="다양한 업종의 성공 사례를 확인하세요."
-            description="카드를 hover 하면 해당 사례가 크게 펼쳐집니다. 업종별 전환 최적화 사례를 직접 확인하세요."
+            description="어디서도 볼 수 없는 업종별 전환 최적화 사례를 직접 확인하세요."
           />
         </Reveal>
 

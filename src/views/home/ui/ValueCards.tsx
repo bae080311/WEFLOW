@@ -8,8 +8,7 @@ import { VALUE_CARDS } from "../config/homeContent";
 
 const ICONS: LucideIcon[] = [Workflow, Rocket, Wallet];
 
-// 핵심 가치 — 활성 카드가 큰 슬롯으로 올라오고 나머지는 옆에 스택.
-// 자동으로 하나씩 차례대로 넘어가며(hover/포커스 시 정지), 클릭/점으로도 전환.
+// 핵심 가치 — 동일 크기 3카드, 활성 카드가 떠오르고 빛나며 자동 순환(hover/포커스 시 정지·점으로도 전환).
 export function ValueCards() {
   const count = VALUE_CARDS.length;
   const [active, setActive] = useState(0);
@@ -34,9 +33,6 @@ export function ValueCards() {
     return () => window.clearInterval(id);
   }, [autoOk, paused, count]);
 
-  const rest = VALUE_CARDS.map((_, i) => i).filter((i) => i !== active);
-  const order = [active, ...rest];
-
   return (
     <Section className="relative isolate overflow-hidden">
       <div className="section-aura opacity-60" aria-hidden />
@@ -54,52 +50,55 @@ export function ValueCards() {
           onFocusCapture={() => setPaused(true)}
           onBlurCapture={() => setPaused(false)}
         >
-          <ul className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:grid-rows-2">
-            {order.map((origIdx, pos) => {
-              const featured = pos === 0;
-              const card = VALUE_CARDS[origIdx];
-              const Icon = ICONS[origIdx % ICONS.length];
+          <ul className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+            {VALUE_CARDS.map((card, i) => {
+              const isActive = i === active;
+              const Icon = ICONS[i % ICONS.length];
               return (
-                <li key={card.title} className={cn(featured && "lg:col-span-2 lg:row-span-2")}>
+                <li key={card.title}>
                   <button
                     type="button"
-                    onClick={() => setActive(featured ? (active + 1) % count : origIdx)}
-                    aria-label={featured ? "다음 가치 보기" : `${card.title} 보기`}
+                    onClick={() => setActive(i)}
+                    aria-pressed={isActive}
+                    aria-label={`${card.title} 보기`}
                     className={cn(
-                      "group relative flex h-full w-full flex-col overflow-hidden rounded-card p-7 text-left transition-[transform,border-color,box-shadow] duration-300 ease-out",
-                      "hover:-translate-y-1.5 hover:shadow-glow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cyan motion-reduce:transition-none motion-reduce:hover:translate-y-0",
-                      featured
-                        ? "gradient-ring justify-end bg-gradient-card lg:p-10"
-                        : "justify-start border border-border bg-surface/60 backdrop-blur-sm hover:border-brand-cyan/40",
+                      "group relative flex h-full w-full flex-col overflow-hidden rounded-card p-7 text-left",
+                      "transition-[transform,border-color,box-shadow] duration-300 ease-out",
+                      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cyan motion-reduce:transition-none",
+                      isActive
+                        ? "gradient-ring bg-gradient-card shadow-glow motion-safe:-translate-y-1"
+                        : "border border-border bg-surface/60 backdrop-blur-sm hover:-translate-y-1 hover:border-brand-cyan/40 motion-reduce:hover:translate-y-0",
                     )}
                   >
-                    <span
-                      className={cn(
-                        "text-gradient-brand pointer-events-none absolute select-none font-bold leading-none opacity-15",
-                        featured ? "-right-2 -top-6 text-[10rem]" : "-right-1 -top-3 text-[5rem]",
-                      )}
-                      aria-hidden
-                    >
-                      {String(origIdx + 1).padStart(2, "0")}
-                    </span>
-                    {/* 활성 카드 전환 시 페이드인 */}
-                    <span
-                      key={featured ? `f-${active}` : undefined}
-                      className={cn("contents", featured && "motion-safe:[&>*]:animate-fade-up")}
-                    >
+                    {isActive ? (
+                      <span
+                        className="glow-orb -right-8 -top-10 size-44 bg-brand-cyan/20"
+                        aria-hidden
+                      />
+                    ) : null}
+
+                    <span className="relative flex items-center justify-between">
                       <span
                         className={cn(
-                          "grid place-items-center rounded-control bg-gradient-brand text-white",
-                          featured ? "size-14" : "size-12",
+                          "grid size-12 place-items-center rounded-control bg-gradient-brand text-white transition-transform duration-300",
+                          isActive && "motion-safe:scale-110",
                         )}
                       >
-                        <Icon className={featured ? "size-7" : "size-6"} aria-hidden />
+                        <Icon className="size-6" aria-hidden />
                       </span>
-                      <h3 className={cn("mt-5 text-text", featured ? "text-hero" : "text-h2")}>
-                        {card.title}
-                      </h3>
-                      <p className="mt-3 max-w-md text-body text-text-muted">{card.description}</p>
+                      <span
+                        className={cn(
+                          "select-none text-[3.25rem] font-bold leading-none transition-colors duration-300",
+                          isActive ? "text-gradient-brand opacity-50" : "text-text-subtle/25",
+                        )}
+                        aria-hidden
+                      >
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
                     </span>
+
+                    <h3 className="relative mt-6 text-h2 text-text">{card.title}</h3>
+                    <p className="relative mt-2 text-body text-text-muted">{card.description}</p>
                   </button>
                 </li>
               );

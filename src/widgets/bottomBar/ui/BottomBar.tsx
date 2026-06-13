@@ -9,8 +9,9 @@ const ICONS: Record<string, LucideIcon> = {
   무료진단: ClipboardCheck,
 };
 
+// 라벨은 항상 1줄 유지(좁은 폭에선 글자 축소) → 바 높이가 56px로 고정되어 layout 하단 패딩과 일치.
 const cellClass =
-  "flex min-h-[56px] flex-col items-center justify-center gap-1 px-2 py-2 text-caption text-text-muted transition-colors hover:text-text active:text-brand-cyan focus-visible:text-text focus-visible:outline-none";
+  "flex min-h-[56px] flex-col items-center justify-center gap-1 whitespace-nowrap px-1 py-2 text-[11px] leading-tight text-text-muted transition-colors hover:text-text active:text-brand-cyan focus-visible:text-text focus-visible:outline-none sm:px-2 sm:text-caption";
 
 export function BottomBar() {
   return (

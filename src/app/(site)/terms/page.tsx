@@ -1,9 +1,11 @@
-import { Container } from "@/shared/ui";
+import type { Metadata } from "next";
+import { LegalDocument } from "@/widgets/legalDocument";
+import { TERMS_OF_SERVICE } from "@/shared/config";
+
+export const metadata: Metadata = {
+  title: "이용약관 | WEFLOW",
+};
 
 export default function TermsPage() {
-  return (
-    <Container as="section" className="py-20">
-      <h1 className="text-h1 font-bold text-text">이용약관</h1>
-    </Container>
-  );
+  return <LegalDocument {...TERMS_OF_SERVICE} />;
 }

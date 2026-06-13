@@ -13,6 +13,6 @@ describe("CasesView", () => {
     );
     expect(CASES).toHaveLength(28);
     expect(screen.getAllByRole("link", { name: /자세히 보기/ })).toHaveLength(28);
-    expect(screen.getByRole("button", { name: "더 많은 사례 문의하기" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "더보기" })).toBeInTheDocument();
   });
 });

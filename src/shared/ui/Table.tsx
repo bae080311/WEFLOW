@@ -1,11 +1,16 @@
 import type { ComponentPropsWithoutRef } from "react";
 import { cn } from "@/shared/lib/cn";
 
+// 모바일에서는 block(=카드 스택), md 이상에서 일반 table. 데스크탑만 가로 스크롤/최소폭 적용.
 export function Table({ className, ...rest }: ComponentPropsWithoutRef<"table">) {
   return (
-    <div className="w-full overflow-x-auto">
+    <div className="w-full md:overflow-x-auto">
       <table
-        className={cn("w-full min-w-160 border-collapse text-left text-body", className)}
+        role="table"
+        className={cn(
+          "block w-full border-collapse text-left text-body md:table md:min-w-160",
+          className,
+        )}
         {...rest}
       />
     </div>
