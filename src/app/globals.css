@@ -325,6 +325,48 @@
   }
 }
 
+/* 헤더 모바일 드로어 진입 — 패널 슬라이드 + 배경 페이드 */
+.animate-fade-in {
+  animation: fade-in 0.25s ease-out forwards;
+}
+.animate-drawer-in {
+  animation: drawer-in 0.32s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes drawer-in {
+  from {
+    transform: translate3d(100%, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* 커스텀 셀렉트 드롭다운 열림 */
+.animate-select-in {
+  animation: select-in 0.16s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes select-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 html {
   scroll-behavior: smooth;
 }
