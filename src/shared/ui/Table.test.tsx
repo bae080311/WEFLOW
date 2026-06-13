@@ -19,8 +19,10 @@ describe("Table", () => {
       </Table>,
     );
     const table = screen.getByRole("table");
-    expect(table).toHaveClass("min-w-160");
-    expect(table.parentElement).toHaveClass("overflow-x-auto");
+    // 데스크탑(md+)에서만 가로 스크롤/최소폭 — 모바일은 block(카드)
+    expect(table).toHaveClass("md:min-w-160");
+    expect(table).toHaveClass("block", "md:table");
+    expect(table.parentElement).toHaveClass("md:overflow-x-auto");
   });
 
   it("헤더 셀은 scope=col 인 th, 데이터 셀은 td 로 렌더한다", () => {
