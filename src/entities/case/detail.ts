@@ -5,6 +5,7 @@ import type { Case } from "./model";
 // 어떤 업종에도 자연스럽고, 의료/병원 관련 표현은 절대 포함하지 않는다.
 export type CaseDetail = {
   industry: string;
+  image: string;
   problem: string;
   direction: string;
   expectedEffect: string;
@@ -15,6 +16,7 @@ export function getCaseDetail(caseItem: Case): CaseDetail {
   const i = caseItem.industry;
   return {
     industry: i,
+    image: caseItem.image,
     problem:
       `${i} 업종은 검색으로 들어온 방문자가 가격과 이용 안내를 충분히 확인하지 못하고 이탈하는 경우가 많았습니다. ` +
       `문의 버튼이 한눈에 들어오지 않아 상담으로 이어지는 비율도 낮았습니다.`,
